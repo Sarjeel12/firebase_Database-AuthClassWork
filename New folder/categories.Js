@@ -11,7 +11,7 @@ const modal = document.getElementById('modal');
 const modalForm = document.getElementById('modal-form');
 
 function render() {
-    tableBody.innerHTML = categories.map(cat => `
+    tableBody.innerHTML = categories.map((cat) => `
                 <tr>
                     <td>#${cat.id}</td>
                     <td>${cat.name}</td>
@@ -28,7 +28,7 @@ function openModal(id = null) {
     document.getElementById('edit-id').value = id || '';
     document.getElementById('modal-title').textContent = id ? 'Edit Category' : 'Add Category';
     if (id) {
-        const cat = categories.find(c => c.id === id);
+        const cat = categories.find((c) => c.id === id);
         document.getElementById('cat-name').value = cat.name;
         document.getElementById('cat-count').value = cat.count;
     } else {
@@ -47,7 +47,7 @@ function edit(id) {
 
 function del(id) {
     if (confirm('Are you sure?')) {
-        categories = categories.filter(c => c.id !== id);
+        categories = categories.filter((c) => c.id !== id);
         setData('categories', categories);
         render();
     }
@@ -59,16 +59,16 @@ modalForm.onsubmit = async (e) => {
     const name = document.getElementById('cat-name').value;
     const count = document.getElementById('cat-count').value;
 
-    var catKey = firebase.database().ref("category").push().getKey(); //Key Generator
+    var catKey = firebase.database().ref("CATEGORY").push().getKey(); //Key Generator
 
     var object = {
-        name: name,
+        CatName: name,
         count: count,
         catKey: catKey
     }
     console.log(object);
 
-    await firebase.database().ref("category").chlid(catKey).set(object);
+    await firebase.database().ref("CATEGORY").child(catKey).set(object)
     alert("Add New Category");
 
     // if (id) {
@@ -85,11 +85,41 @@ modalForm.onsubmit = async (e) => {
     closeModal();
 };
 
-async function getAllCategory() {
-    await firebase.datbase().ref("CATEGORY").get().then((db) => (
-        console.log(databseCat.val())
+// async function getAllCategory() {
+//     await firebase.database().ref("CATEGORY").get().then((databaseCat) => {
+//         console.log(databaseCat.val());
 
-    ))
+//         Object.values(databaseCat.val())
+//         console.log(data);
+
+//         for(var i = 0; i < data.length; i++){
+//             console.log(data[i])
+//         }
+//     });
+// }
+// getAllCategory();
+
+
+async function getAllCategory() {
+    await firebase.database().ref("CATEGORY").get().then((databaseCat) => {
+
+        // ✅ MUST check
+        if (databaseCat.val() === null) {
+            console.log("No Category Found");
+            return;
+        }
+
+        let data = Object.values(databaseCat.val());
+        console.log(data);
+
+        for (var i = 0; i < data.length; i++) {
+            console.log(data[i]);
+        }
+    });
 }
-getAllCategory()
+getAllCategory();
+
+
+
+
 // render();
