@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Categories - AdminPro</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
     <div class="dashboard-layout">
         <div id="sidebar-container"></div>
@@ -55,8 +57,33 @@
         </div>
     </div>
 
+
+
+
+
+
+
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-database-compat.js"></script>
+    
     <script src="script.js"></script>
+    
     <script>
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCplNHmDQ-iytGBjJMhzLLkGVJfZf1tCiM",
+            authDomain: "ecom-classwrk.firebaseapp.com",
+            projectId: "ecom-classwrk",
+            storageBucket: "ecom-classwrk.firebasestorage.app",
+            messagingSenderId: "971597633294",
+            appId: "1:971597633294:web:d0aa21ec65e67186b7a95f"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <script src="categories.Js">
         // checkAuth();
         // document.getElementById('sidebar-container').innerHTML = getSidebar();
 
@@ -129,4 +156,5 @@
         // render();
     </script>
 </body>
+
 </html>

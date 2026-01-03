@@ -1,6 +1,10 @@
 checkAuth();
 document.getElementById('sidebar-container').innerHTML = getSidebar();
 
+
+console.log(firebase.database());
+
+
 let categories = getData('categories');
 const tableBody = document.getElementById('table-body');
 const modal = document.getElementById('modal');
@@ -49,22 +53,43 @@ function del(id) {
     }
 }
 
-modalForm.onsubmit = (e) => {
+modalForm.onsubmit = async (e) => {
     e.preventDefault();
     const id = document.getElementById('edit-id').value;
     const name = document.getElementById('cat-name').value;
     const count = document.getElementById('cat-count').value;
 
-    if (id) {
-        const index = categories.findIndex(c => c.id == id);
-        categories[index] = { id: parseInt(id), name, count: parseInt(count) };
-    } else {
-        const newId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
-        categories.push({ id: newId, name, count: parseInt(count) });
+    var catKey = firebase.database().ref("category").push().getKey(); //Key Generator
+
+    var object = {
+        name: name,
+        count: count,
+        catKey: catKey
     }
-    setData('categories', categories);
-    render();
+    console.log(object);
+
+    await firebase.database().ref("category").chlid(catKey).set(object);
+    alert("Add New Category");
+
+    // if (id) {
+    //     const index = categories.findIndex(c => c.id == id);
+    //     categories[index] = { id: parseInt(id), name, count: parseInt(count) };
+    // } else {
+    //     const newId = categories.length > 0 ? Math.max(...categories.map(c => c.id)) + 1 : 1;
+    //     categories.push({ id: newId, name, count: parseInt(count) });
+    // }
+    // setData('categories', categories);
+    // render();
+
+
     closeModal();
 };
 
-render();
+async function getAllCategory() {
+    await firebase.datbase().ref("CATEGORY").get().then((db) => (
+        console.log(databseCat.val())
+
+    ))
+}
+getAllCategory()
+// render();

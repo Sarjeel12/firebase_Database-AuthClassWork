@@ -1,23 +1,23 @@
 // Data Initialization
 const EXAMPLE_DATA = {
     users: [
-        { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
-        { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
-        { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "User" }
+        // { id: 1, name: "John Doe", email: "john@example.com", role: "Admin" },
+        // { id: 2, name: "Jane Smith", email: "jane@example.com", role: "User" },
+        // { id: 3, name: "Mike Johnson", email: "mike@example.com", role: "User" }
     ],
     categories: [
-        { id: 1, name: "Electronics", count: 12 },
-        { id: 2, name: "Clothing", count: 45 },
-        { id: 3, name: "Home & Garden", count: 8 }
+        // { id: 1, name: "Electronics", count: 12 },
+        // { id: 2, name: "Clothing", count: 45 },
+        // { id: 3, name: "Home & Garden", count: 8 }
     ],
     products: [
-        { id: 1, name: "iPhone 13", price: 999, category: "Electronics" },
-        { id: 2, name: "T-Shirt", price: 29, category: "Clothing" },
-        { id: 3, name: "Sofa", price: 499, category: "Home & Garden" }
+        // { id: 1, name: "iPhone 13", price: 999, category: "Electronics" },
+        // { id: 2, name: "T-Shirt", price: 29, category: "Clothing" },
+        // { id: 3, name: "Sofa", price: 499, category: "Home & Garden" }
     ],
     orders: [
-        { id: 101, user: "John Doe", total: 1028, status: "Completed" },
-        { id: 102, user: "Jane Smith", total: 29, status: "Pending" }
+        // { id: 101, user: "John Doe", total: 1028, status: "Completed" },
+        // { id: 102, user: "Jane Smith", total: 29, status: "Pending" }
     ]
 };
 
