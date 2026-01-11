@@ -10,7 +10,7 @@
 
 <body>
 
-    
+    <!--     
     <div class="dashboard-layout">
         <div id="sidebar-container"></div>
         <div class="main-content">
@@ -31,15 +31,15 @@
                     </thead>
                     <tbody id="table-body">
                         <!-- Data here -->
-                    </tbody>
+    <!-- </tbody>
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- Modal -->
 
-    <div class="modal" id="modal">
+    <!-- <div class="modal" id="modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modal-title">Add Category</h2>
@@ -58,9 +58,64 @@
                 <button type="submit" class="btn">Save</button>
             </form>
         </div>
+    </div> -->
+
+
+    <div class="dashboard-layout">
+        <div id="sidebar-container"></div>
+        <div class="main-content">
+            <div class="header">
+                <h1 class="page-title">Categories</h1>
+                <button class="btn btn-sm" onclick="openModal()">
+                    + Add Category
+                </button>
+            </div>
+
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Product Count</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr>
+                            <td colspan="4" style="text-align: center;">
+                                <img
+                                    src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3VreHppNzd3Nno3em01NnR0OWFoNzZ3cHI2NGY4NDU2OGZwcTdhOCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/L05HgB2h6qICDs5Sms/200.gif" />
+                            </td>
+                        </tr>
+                        <!-- Data here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-
+    <!-- Modal -->
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Add Category</h2>
+                <button class="close-modal" onclick="closeModal()">&times;</button>
+            </div>
+            <form id="modal-form">
+                <input type="hidden" id="edit-id" />
+                <div class="form-group">
+                    <label class="form-label">Category Name</label>
+                    <input type="text" class="form-input" id="cat-name" required />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Product Count (Demo)</label>
+                    <input type="number" class="form-input" id="cat-count" required value="0" />
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
 
 
 
@@ -68,9 +123,9 @@
 
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-database-compat.js"></script>
-    
+
     <script src="script.js"></script>
-    
+
     <script>
 
 
@@ -85,7 +140,7 @@
 
         firebase.initializeApp(firebaseConfig);
     </script>
-    
+
     <script src="categories.Js">
         // checkAuth();
         // document.getElementById('sidebar-container').innerHTML = getSidebar();
