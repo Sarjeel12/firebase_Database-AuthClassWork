@@ -1,14 +1,13 @@
 checkAuth();
 document.getElementById('sidebar-container').innerHTML = getSidebar();
-
-
 console.log(firebase.database());
-
-
 let categories = getData('categories');
 const tableBody = document.getElementById('table-body');
 const modal = document.getElementById('modal');
 const modalForm = document.getElementById('modal-form');
+
+
+var updatebtn = document.getElementById("updatebtn");
 
 // function render() {
 //     tableBody.innerHTML = categories.map((cat) => `
@@ -23,7 +22,6 @@ const modalForm = document.getElementById('modal-form');
 //                 </tr>
 //             `).join('');
 // }
-
 // function openModal(id = null) {
 //     document.getElementById('edit-id').value = id || '';
 //     document.getElementById('modal-title').textContent = id ? 'Edit Category' : 'Add Category';
@@ -36,15 +34,12 @@ const modalForm = document.getElementById('modal-form');
 //     }
 //     modal.classList.add('active');
 // }
-
 // function closeModal() {
 //     modal.classList.remove('active');
 // }
-
 // function edit(id) {
 //     openModal(id);
 // }
-
 // function del(id) {
 //     if (confirm('Are you sure?')) {
 //         categories = categories.filter((c) => c.id !== id);
@@ -61,7 +56,6 @@ const modalForm = document.getElementById('modal-form');
 //     const count = document.getElementById('cat-count').value;
 
 //     var catKey = firebase.database().ref("CATEGORY").push().getKey(); //Key Generator
-
 //     var object = {
 //         CatName: name,
 //         count: count,
@@ -81,8 +75,6 @@ const modalForm = document.getElementById('modal-form');
 //     // }
 //     // setData('categories', categories);
 //     // render();
-
-
 //     closeModal();
 // };
 
@@ -100,7 +92,6 @@ const modalForm = document.getElementById('modal-form');
 // // }
 // // getAllCategory();
 
-
 // async function getAllCategory() {
 //     await firebase.database().ref("CATEGORY").get().then((databaseCat) => {
 
@@ -109,44 +100,49 @@ const modalForm = document.getElementById('modal-form');
 //             console.log("No Category Found");
 //             return;
 //         }
-
 //         let data = Object.values(databaseCat.val());
 //         console.log(data);
 
 //         for (var i = 0; i < data.length; i++) {
 //             console.log(data[i]);
-
 //         }
 //     });
 // }
 // getAllCategory();
 
-
-
-
 // // render();
 
-// javascript:
+var savebtn = document.getElementById("savebtn");
+var selectedid = "";
 
-// checkAuth();
-// document.getElementById("sidebar-container").innerHTML = getSidebar();
+// Sir Zubair code
 
-// console.log(firebase.database())
-
-// let categories = getData("categories");
-// const tableBody = document.getElementById("table-body");
-// const modal = document.getElementById("modal");
-// const modalForm = document.getElementById("modal-form");
-
-
-
-
-function openModal(id = null) {
+async function openModal(id = null) {
     document.getElementById("edit-id").value = id || "";
     document.getElementById("modal-title").textContent = id
         ? "Edit Category"
         : "Add Category";
+        selectedid = id;
 
+    if (id != null) {
+        // document.getElementById
+        await firebase.database().ref("CATGEORY").child(id).get()
+            .then((snapdb) => {
+                console.log(snapdb.val())
+                document.getElementById("cat-name").value = snapdb.val()["catName"]
+                document.getElementById("cat-count").value = snapdb.val()["count"]
+                updatebtn.style.display = "inline"
+                savebtn.style.display = "none"
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    } else {
+        document.getElementById("cat-name").value = "";
+        document.getElementById("cat-count").value = "";
+        updatebtn.style.display = "none";
+        savebtn.style.display = "inline";
+    };
 
     // if (id) {
     //     const cat = categories.find((c) => c.id === id);
@@ -162,11 +158,11 @@ function openModal(id = null) {
 
 function closeModal() {
     modal.classList.remove("active");
-}
+};
 
 function edit(id) {
     openModal(id);
-}
+};
 
 function del(id) {
     if (confirm("Are you sure?")) {
@@ -174,12 +170,12 @@ function del(id) {
         setData("categories", categories);
         render();
     }
-}
+};
 
 
 //add new category
-modalForm.onsubmit = async (e) => {
-    e.preventDefault();
+ async function addNewCat () {
+    // e.preventDefault();
     const id = document.getElementById("edit-id").value;
     const name = document.getElementById("cat-name").value;
     const count = document.getElementById("cat-count").value;
@@ -195,12 +191,41 @@ modalForm.onsubmit = async (e) => {
         catName: name,
         count: count,
         catKey: catKey
-    }
+    };
 
     console.log(object);
 
     await firebase.database().ref("CATGEORY").child(catKey).set(object)
     alert("add new category");
+    getAllCategory();
+
+
+    closeModal();
+};
+
+ async function addUpdatedCat () {
+    // e.preventDefault();
+    // const id = document.getElementById("edit-id").value;
+    const name = document.getElementById("cat-name").value;
+    const count = document.getElementById("cat-count").value;
+
+    //   push=> make new key => key =>make new key 
+    //   set => set data /replace
+
+    // Math.random()*1000=>0,1,2,
+    // var catKey = firebase.database().ref("CATGEORY").push().getKey(); // key generate   5
+    // uid => uid
+
+    var object = {
+        catName: name,
+        count: count,
+        catKey: selectedid,
+    };
+
+    console.log(object);
+
+    await firebase.database().ref("CATGEORY").child(selectedid).set(object)
+    alert("Updated");
     getAllCategory();
 
 
@@ -236,7 +261,7 @@ async function getAllCategory() {
           <td>${data[i].catName}</td>
           <td>${data[i]["count"]}</td>
           <td>
-          <button>Edit</button>
+          <button onClick="openModal('${data[i]["catKey"]}')">Edit</button>
           <button onClick="deleteItem('${data[i]["catKey"]}')">
           Delete
           </button>
@@ -249,25 +274,24 @@ async function getAllCategory() {
     })
         .catch((e) => {
             console.log(e);
-        })
+        });
 
-}
+};
 
 getAllCategory();
 
 async function deleteItem(key) {
     await firebase.database().ref("CATGEORY").child(key).remove()
-    alert("Dleted");
+    alert("Deleted");
     console.log("Deleted", key);
     getAllCategory();
 
-}
+};
 
 // setInterval(()=>{
 // getAllCategory()
 // },3000)
 
-
-
-
 // render();
+
+
