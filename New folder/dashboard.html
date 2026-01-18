@@ -1,11 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - AdminPro</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
+<style>
+    .hide {
+        display: none;
+    }
+
+    .show {
+        display: block;
+    }
+</style>
+
 <body>
     <div class="dashboard-layout">
         <div id="sidebar-container"></div>
@@ -17,7 +29,13 @@
                 </div>
             </div>
 
-            <div class="stats-grid">
+            <div id="loading" style="text-align: center;">
+                <img
+                    src="https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyN3VreHppNzd3Nno3em01NnR0OWFoNzZ3cHI2NGY4NDU2OGZwcTdhOCZlcD12MV9zdGlja2Vyc19zZWFyY2gmY3Q9cw/L05HgB2h6qICDs5Sms/200.gif" />
+
+            </div>
+
+            <div class="stats-grid hide" id="cards">
                 <div class="stat-card">
                     <div class="stat-title">Total Users</div>
                     <div class="stat-value" id="stats-users">0</div>
@@ -38,7 +56,7 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+
     <script>
         checkAuth();
         document.getElementById('sidebar-container').innerHTML = getSidebar();
@@ -52,5 +70,26 @@
         document.getElementById('stats-products').textContent = getData('products').length;
         document.getElementById('stats-orders').textContent = getData('orders').length;
     </script>
+
+    <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
+
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCplNHmDQ-iytGBjJMhzLLkGVJfZf1tCiM",
+            authDomain: "ecom-classwrk.firebaseapp.com",
+            projectId: "ecom-classwrk",
+            storageBucket: "ecom-classwrk.firebasestorage.app",
+            messagingSenderId: "971597633294",
+            appId: "1:971597633294:web:d0aa21ec65e67186b7a95f"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="script.js"></script>
+    <script src="dashboard.Js"></script>
 </body>
+
 </html>

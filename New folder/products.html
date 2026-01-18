@@ -1,11 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Products - AdminPro</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        img{
+            height: 100px;
+            width: 100px;
+            object-fit: cover;
+            display: none;
+        };
+    </style>
 </head>
+
 <body>
     <div class="dashboard-layout">
         <div id="sidebar-container"></div>
@@ -42,14 +52,19 @@
                 <button class="close-modal" onclick="closeModal()">&times;</button>
             </div>
             <form id="modal-form">
+                <input type="file" id="file" />
+
+                <img src="" alt="" id="imageShow">
+
                 <input type="hidden" id="edit-id">
+
                 <div class="form-group">
                     <label class="form-label">Product Name</label>
                     <input type="text" class="form-input" id="prod-name" required>
                 </div>
                 <div class="form-group">
                     <label class="form-label">Category</label>
-                    <select class="form-input" id="prod-cat" required>
+                    <select class="form-input" id="productCategory" required>
                         <!-- Options filled via JS -->
                     </select>
                 </div>
@@ -57,13 +72,36 @@
                     <label class="form-label">Price</label>
                     <input type="number" class="form-input" id="prod-price" required>
                 </div>
-                <button type="submit" class="btn">Save</button>
+                <button type="submit" class="btn" onclick="uploadImage()">Save</button>
             </form>
         </div>
     </div>
 
     <script src="script.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/12.7.0/firebase-database-compat.js"></script>
+
+    <!-- <script src="script.js"></script> -->
+
     <script>
+
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyCplNHmDQ-iytGBjJMhzLLkGVJfZf1tCiM",
+            authDomain: "ecom-classwrk.firebaseapp.com",
+            projectId: "ecom-classwrk",
+            storageBucket: "ecom-classwrk.firebasestorage.app",
+            messagingSenderId: "971597633294",
+            appId: "1:971597633294:web:d0aa21ec65e67186b7a95f"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="product.Js"></script>
+    <!-- <script>
         checkAuth();
         document.getElementById('sidebar-container').innerHTML = getSidebar();
 
@@ -142,6 +180,7 @@
         };
 
         render();
-    </script>
+    </script> -->
 </body>
+
 </html>
