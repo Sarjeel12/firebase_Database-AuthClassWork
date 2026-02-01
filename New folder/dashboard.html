@@ -58,6 +58,7 @@
 
 
     <script>
+
         checkAuth();
         document.getElementById('sidebar-container').innerHTML = getSidebar();
 
@@ -69,6 +70,7 @@
         document.getElementById('stats-categories').textContent = getData('categories').length;
         document.getElementById('stats-products').textContent = getData('products').length;
         document.getElementById('stats-orders').textContent = getData('orders').length;
+    
     </script>
 
     <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
@@ -76,6 +78,7 @@
 
 
     <script>
+    
         const firebaseConfig = {
             apiKey: "AIzaSyCplNHmDQ-iytGBjJMhzLLkGVJfZf1tCiM",
             authDomain: "ecom-classwrk.firebaseapp.com",
