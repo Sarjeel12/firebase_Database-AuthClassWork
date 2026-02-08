@@ -19,6 +19,12 @@ function signIn() {
                     .get()
                     .then((db) => {
                         console.log(db.val());
+                        localStorage.setItem("UserId", data.user.uid);
+                        localStorage.setItem("Username", db.val()["name"]);
+                        localStorage.setItem("Email", db.val()["email"]);
+                        localStorage.setItem("userImageUrl", db.val()["userImageUrl"]);
+
+                        window.location.href = "./home.html";
                     });
             })
             .catch((err) => {
@@ -26,3 +32,10 @@ function signIn() {
             });
     }
 }
+function checkauth() {
+    var userId = localStorage.getItem("UserId");
+    if (userId != undefined && userId != null) {
+        window.location.href = "./ecom-user-panel/home.html";
+    }
+}
+checkauth();

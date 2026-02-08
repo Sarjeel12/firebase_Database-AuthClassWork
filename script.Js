@@ -46,6 +46,8 @@ function signUp() {
         const auth = firebase.auth();
         const db = firebase.database();
 
+        var uploadImage = await  uploadImage();
+
         auth
             .createUserWithEmailAndPassword(email, password)
             .then(async (userData) => {
@@ -61,6 +63,7 @@ function signUp() {
                     contactNo: contactNo,
                     userImageUrl: userImageUrl
                 };
+                    console.log(userObject);
 
                 await db.ref("users").child(userData.user.uid).set(userObject);
 
@@ -74,7 +77,7 @@ function signUp() {
     }
 }
 
-function uploadImage() {
+async function uploadImage() {
     console.log(userImage.files);
 
     console.log(userImage.files[0].size);
@@ -93,7 +96,7 @@ function uploadImage() {
             redirect: "follow",
         };
 
-        fetch(
+        await fetch(
             "https://api.cloudinary.com/v1_1/dgbkoycyp/image/upload",
             requestOptions
         )
