@@ -1,28 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
 
 <body>
-    <input type="file" id="userImage">
-    <!-- <button onclick="uploadImage()">Upload image</button> -->
 
-
-    <input type="email" name="" id="email" placeholder="enter your email" />
-    <input type="text" name="" id="password" placeholder="enter your password" />
-
-    <input type="text" id="name">
-    <input type="text" id="age">
-    <input type="text" id="contactNo">
-
-
+    <input type="text" id="email" value="newusertest1@yopmail.com">
+    <input type="text" id="password" value="12312312A@a">
 
     <br />
-    <input type="submit" name="" id="signUp" onclick="signUp()" />
+    <input type="submit" name="" id="signIn" onclick="signIn()" />
+
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" style="display: none;"
         id="loadingimg" height="50" width="50" alt="">
 
@@ -30,7 +21,6 @@
     <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-database-compat.js"></script>
-
 
     <script>
         const firebaseConfig = {
@@ -44,7 +34,8 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-    <script src="script.Js"></script>
-</body>
 
+    <script src="app.Js"></script>
+
+</body>
 </html>
