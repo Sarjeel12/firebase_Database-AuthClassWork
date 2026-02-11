@@ -1,32 +1,78 @@
 var googleSignUp = document.getElementById("googleLogin");
 
-googleSignUp.addEventListener("click", async ()=> {
+googleSignUp.addEventListener("click", async () => {
     var auth = new firebase.auth.GoogleAuthProvider();
-    await firebase.auth().signInWithPopup(auth).then((result) => {
-        console.log(result.user);
-        // localStorage.setItem("UserId", result.user.uid);
-        // localStorage.setItem("Username", result.user.displayName);
-        // localStorage.setItem("Email", result.user.email);
-        // localStorage.setItem("userImageUrl", result.user.photoURL);
+    await firebase
+        .auth()
+        .signInWithPopup(auth)
+        .then(async (result) => {
+            console.log(result.user);
+            console.log(result.user.email);
+            console.log(result.user.photoURL);
+            console.log(result.user.displayName);
+            console.log(result.user.uid);
+            // localStorage.setItem("UserId", result.user.uid);
+            // localStorage.setItem("Username", result.user.displayName);
+            // localStorage.setItem("Email", result.user.email);
+            // localStorage.setItem("userImageUrl", result.user.photoURL);
 
-        // window.location.href = "./home.html";
-    }).catch((error) => {
-        alert(error);
-    });
-})
+            // window.location.href = "./home.html";
+            var userAccount = await CheckUserAccount(result.user.email);
+            if (userAccount == true) {
+                console.log("account already exist");
+                localStorage.setItem("UserId", result.user.uid);
+                localStorage.setItem("Username", result.user.displayName);
+                localStorage.setItem("Email", result.user.email);
+                localStorage.setItem("userImageUrl", result.user.photoURL);
 
-async function CheckUserAcc(){
-    await firebase.database().ref("users")
-    .get()
-    .then((snapshot) => {
-        // if (snapshot.exists()) {
-            console.log(snapshot.val());
-        var data =  Object.values(snapshot.val());
-    })
-    .catch( (e) => {
-        console.log(e);
-    });
+                window.location.href = "./ecom-user-panel/home.html";
+            } else {
+                console.log("not found");
+                var object = {
+                    name: result.user.displayName,
+                    email: result.user.email,
+                    userImageUrl: result.user.photoURL,
+                    uid: result.user.uid,
+                };
+                console.log(object);
+                await firebase.database().ref("users").child(result.user.uid).set(object);
+                alert("account add");
+                localStorage.setItem("UserId", result.user.uid);
+                localStorage.setItem("Username", result.user.displayName);
+                localStorage.setItem("Email", result.user.email);
+                localStorage.setItem("userImageUrl", result.user.photoURL);
 
+                window.location.href = "./ecom-user-panel/home.html"
+            };
+
+        }).catch((e) => {
+            console.log(e);
+        });
+});
+
+async function CheckUserAcc(email) {
+    var check = false;
+    await firebase
+        .database()
+        .ref("users")
+        .get()
+        .then((snap) => {
+            // if (snapshot.exists()) {
+            console.log(snap.val());
+            var data = Object.values(snap.val());
+            for(var value of data){
+                console.log(value);
+                if(value["email"] == email){
+                    check = true;
+                    break;
+                };
+            }
+        })
+        .catch((e) => {
+            console.log(e);
+        });
+        console.log(check);
+        return check;
 }
 
 function signIn() {
@@ -55,7 +101,7 @@ function signIn() {
                         localStorage.setItem("Email", db.val()["email"]);
                         localStorage.setItem("userImageUrl", db.val()["userImageUrl"]);
 
-                        window.location.href = "./home.html";
+                        window.location.href = "./ecom-user-panel/home.html";
                     });
             })
             .catch((err) => {

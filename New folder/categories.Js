@@ -1,6 +1,8 @@
-checkAuth();
+// checkAuth();
+
 document.getElementById('sidebar-container').innerHTML = getSidebar();
 console.log(firebase.database());
+
 let categories = getData('categories');
 const tableBody = document.getElementById('table-body');
 const modal = document.getElementById('modal');
@@ -124,6 +126,8 @@ async function openModal(id = null) {
         : "Add Category";
         selectedid = id;
 
+        console.log(id);
+
     if (id != null) {
         // document.getElementById
         await firebase.database().ref("CATGEORY").child(id).get()
@@ -195,7 +199,7 @@ function del(id) {
 
     console.log(object);
 
-    await firebase.database().ref("CATGEORY").child(catKey).set(object)
+    await firebase.database().ref("CATGEORY").child(catKey).set(object);
     alert("add new category");
     getAllCategory();
 
@@ -251,10 +255,10 @@ async function getAllCategory() {
             tableBody.innerHTML = "";
             var data = Object.values(databaseCat.val());
             // var key = Object.keys(databaseCat.val())
-            console.log(data);
+            // console.log(data);
             // console.log(key)
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i]["catKey"]);
+                // console.log(data[i]["catKey"]);
                 tableBody.innerHTML += `
           <tr>
           <td>${i + 1}</td>
@@ -267,8 +271,7 @@ async function getAllCategory() {
           </button>
           </td>
           </tr>
-          `
-
+          `;
             }
         }
     })
@@ -283,9 +286,9 @@ getAllCategory();
 async function deleteItem(key) {
     await firebase.database().ref("CATGEORY").child(key).remove()
     alert("Deleted");
-    console.log("Deleted", key);
+    // console.log("Deleted", key);
     getAllCategory();
-
+    console.log(key);
 };
 
 // setInterval(()=>{

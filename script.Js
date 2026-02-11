@@ -19,7 +19,7 @@
 var userImage = document.getElementById("userImage");
 var userImageUrl = "";
 
-function signUp() {
+async function signUp() {
     var email = document.getElementById("email").value;
     var password = document.getElementById("password").value;
     var contactNo = document.getElementById("contactNo").value;
@@ -82,6 +82,7 @@ async function uploadImage() {
     console.log(userImage.files);
 
     console.log(userImage.files[0].size);
+    
     var checkSize = userImage.files[0].size / 1024 / 1024;
     console.log(checkSize);
     if (checkSize > 2) {
