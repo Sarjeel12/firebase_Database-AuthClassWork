@@ -130,7 +130,7 @@ async function openModal(id = null) {
 
     if (id != null) {
         // document.getElementById
-        await firebase.database().ref("CATGEORY").child(id).get()
+        await firebase.database().ref("CATEGORY").child(id).get()
             .then((snapdb) => {
                 console.log(snapdb.val())
                 document.getElementById("cat-name").value = snapdb.val()["catName"]
@@ -188,7 +188,7 @@ function del(id) {
     //   set => set data /replace
 
     // Math.random()*1000=>0,1,2,
-    var catKey = firebase.database().ref("CATGEORY").push().getKey(); // key generate   5
+    var catKey = firebase.database().ref("CATEGORY").push().getKey(); // key generate   5
     // uid => uid
 
     var object = {
@@ -199,7 +199,7 @@ function del(id) {
 
     console.log(object);
 
-    await firebase.database().ref("CATGEORY").child(catKey).set(object);
+    await firebase.database().ref("CATEGORY").child(catKey).set(object);
     alert("add new category");
     getAllCategory();
 
@@ -228,7 +228,7 @@ function del(id) {
 
     console.log(object);
 
-    await firebase.database().ref("CATGEORY").child(selectedid).set(object)
+    await firebase.database().ref("CATEGORY").child(selectedid).set(object)
     alert("Updated");
     getAllCategory();
 
@@ -237,7 +237,7 @@ function del(id) {
 };
 
 async function getAllCategory() {
-    await firebase.database().ref("CATGEORY").get().then((databaseCat) => {
+    await firebase.database().ref("CATEGORY").get().then((databaseCat) => {
 
         console.log(databaseCat); //FIREBASE READ FORMATE
         var db = databaseCat.val(); //convert firebase data into USER read able formaTE=>ojhect

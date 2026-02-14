@@ -5,28 +5,40 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <style>
+        .img {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 
-<body>
+<body id="body">
+
+    <img src="" alt=" " id="ShowImage">
+
     <input type="file" id="userImage">
     <!-- <button onclick="uploadImage()">Upload image</button> -->
 
+    <br>
+    <br>
+    <input type="email" name="" id="email" placeholder="enter your email" required />
+    <input type="text" name="" id="password" placeholder="enter your password" required />
 
-    <input type="email" name="" id="email" placeholder="enter your email" />
-    <input type="text" name="" id="password" placeholder="enter your password" />
-
-    <input type="text" id="name">
-    <input type="text" id="age">
-    <input type="text" id="contactNo">
+    <input type="text" id="name" placeholder="Name">
+    <input type="text" id="age" placeholder="Age">
+    <input type="text" id="contactNo" placeholder="Contact No">
 
 
 
     <br />
-    <input type="submit" name="" id="signUp" onclick="signUp()" />
-    <!-- <button id="googleLogin"> Log In with Google </button> -->
     <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" style="display: none;"
         id="loadingimg" height="50" width="50" alt="">
-    <button>Google signup</button>
+
+    <input type="submit" name="" id="signUp" onclick="signUp()" />
+    <!-- <button id="googleLogin"> Log In with Google </button> -->
+    <button id="googleLogin">Google signup</button>
 
     <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/12.6.0/firebase-auth-compat.js"></script>
@@ -43,6 +55,7 @@
             messagingSenderId: "557396142894",
             appId: "1:557396142894:web:6649927edb7cd5281ce8bf"
         };
+
         firebase.initializeApp(firebaseConfig);
     </script>
     <script src="script.Js"></script>

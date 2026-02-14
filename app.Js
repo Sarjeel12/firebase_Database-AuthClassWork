@@ -1,4 +1,6 @@
-var googleSignUp = document.getElementById("googleLogin");
+// var googleSignUp = document.getElementById("googleLogin");
+var products = document.getElementById("products");
+var body = document.getElementsByTagName("body");
 
 googleSignUp.addEventListener("click", async () => {
     var auth = new firebase.auth.GoogleAuthProvider();
