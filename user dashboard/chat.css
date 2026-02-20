@@ -1,0 +1,34 @@
+.maincontainer{
+    height: 80vh;
+    background-color: aqua;
+    padding: 4px;
+}
+
+.sendcontainer{
+    padding: 4px;
+
+}
+.sendcontainer input{
+    width: 95%;
+    height: 40px;
+}
+.send{
+    text-align: left;
+   
+}
+
+.recieve{
+text-align: left;
+}
+
+.chatcontainer{
+     width: 100%;
+    background-color: rgb(196, 196, 196);
+    border: 4px solid green;
+    display: inline-block;
+    border-radius: 10px;
+    padding: 2px;
+    min-height: 40px;
+    /* text-wrap:inherit; */
+    word-break: break-all;
+}
